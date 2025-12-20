@@ -7,7 +7,7 @@
 
 module challenge::day_05 {
     use std::vector;
-    //const E_INDEX_OUT_OF_BOUNDS:u64 = 1; for the optional part (starts in line 56)
+    //const E_INDEX_OUT_OF_BOUNDS:u64 = 1; for the optional part (in line 51)
 
     // Copy from day_04
     public struct Habit has copy, drop {
@@ -48,17 +48,11 @@ module challenge::day_05 {
     // }
     public fun complete_habit(list: &mut HabitList, index: u64){
         let length = vector::length(&list.habits);
+    /*  if (length >= length) abort E_INDEX_OUT_OF_BOUNDS        */
         if (index < length){
             let habit = vector::borrow_mut(&mut list.habits, index);
             habit.completed = true;
         }
     }
-    /*public fun complete_habit(list:: &mut HabitList, index: u64){
-        let length = vector::length(&list.habits);
-        assert!(index >= length, E_INDEX_OUT_OF_BOUNDS);
-    
-        let habit = vector::borrow_mut(&mut list.habits, index);
-        habit.completed = true; 
-    }   */
 }
 
