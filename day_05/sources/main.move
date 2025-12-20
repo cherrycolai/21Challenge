@@ -48,7 +48,7 @@ module challenge::day_05 {
     // }
     public fun complete_habit(list: &mut HabitList, index: u64){
         let length = vector::length(&list.habits);
-    /*  if (length >= length) abort E_INDEX_OUT_OF_BOUNDS        */
+    /*  if (length >= length) abort E_INDEX_OUT_OF_BOUNDS;        */
         if (index < length){
             let habit = vector::borrow_mut(&mut list.habits, index);
             habit.completed = true;
