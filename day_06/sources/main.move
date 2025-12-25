@@ -54,11 +54,21 @@ module challenge::day_06 {
     //     name: String,  // Changed from vector<u8> - String is better!
     //     completed: bool,
     // }
+    public struct Habit has copy, drop {
+        name: String,
+        completed: bool
+    }
 
     // TODO: Update new_habit to accept String
     // public fun new_habit(name: String): Habit {
     //     // Your code here
     // }
+    public fun new_habit(name: String): Habit {
+        Habit {
+            name: String,
+            completed: false
+        }
+    }
 
     // TODO: Write a helper function 'make_habit' that:
     // - Takes name_bytes: vector<u8> (by value, not reference)
@@ -68,5 +78,10 @@ module challenge::day_06 {
     //     // Your code here
     //     // Hint: let name = string::utf8(name_bytes);
     // }
+    public fun make_habit(name_bytes: vector<u8>): Habit {
+        let name = string::utf8(name_bytes);
+        new_habit(name);
+
+    }
 }
 
