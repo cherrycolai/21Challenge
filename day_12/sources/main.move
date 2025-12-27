@@ -58,5 +58,18 @@ module challenge::day_12 {
     //     // Use option::some(index) if found
     //     // Use option::none() if not found
     // }
+    public fun find_task_by_title(board: &TaskBoard, title: &String): Option<u64> {
+        let len = vector::length(&board.tasks);
+        let mut i = 0;
+        
+        while (i < len) {
+            let task = vector::borrow(&board.tasks, i);
+            if (&task.title == title) {
+                return option::some(i)
+            };
+            i = i + 1;
+        };
+        option::none()
+    }
 }
 
