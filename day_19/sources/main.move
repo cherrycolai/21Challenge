@@ -12,6 +12,8 @@
 module challenge::day_19 {
    
 
+    use sui::tx_context;
+
     const MAX_PLOTS: u64 = 20;
     const E_PLOT_NOT_FOUND: u64 = 1;
     const E_PLOT_LIMIT_EXCEEDED: u64 = 2;
@@ -113,6 +115,9 @@ module challenge::day_19 {
     // public fun total_planted(farm: &Farm): u64 {
     //     // Your code here
     // }
+    public fun total_planted(farm: &Farm): u64 {
+        farm.counters.planted
+    }
 
     // TODO: Write a function 'total_harvested' that:
     // - Takes farm: &Farm
@@ -120,10 +125,20 @@ module challenge::day_19 {
     // public fun total_harvested(farm: &Farm): u64 {
     //     // Your code here
     // }
+    public fun total_harvested(farm: &Farm): u64 {
+        farm.counters.harvested
+    }
 
     // TODO: (Optional) Write a test that:
     // - Creates a farm
     // - Plants once
     // - Checks that total_planted returns 1
+    #[test]
+    fun test_farm_counters(){
+        let mut ctx = tx_context::dummy();
+        let farm = new_farm(&mut ctx);
+        plant(&mut farm.counters, 1);
+        assert!(total_planted(&farm) == 1, 0);
+    }
 }
 
