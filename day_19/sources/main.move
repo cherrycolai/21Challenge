@@ -139,18 +139,18 @@ module challenge::day_19 {
 
         let sender = @0x1;
         let mut scenario = test_scenario::begin(sender);
-    
-        let ctx = test_scenario::ctx(&mut scenario);
+        {
+            let ctx = test_scenario::ctx(&mut scenario);
         
-        let mut farm = new_farm(ctx);
+            let mut farm = new_farm(ctx);
         
-        plant(&mut farm.counters, 1);
+            plant(&mut farm.counters, 1);
         
-        assert!(total_planted(&farm) == 1, 0);
+            assert!(total_planted(&farm) == 1, 0);
         
-        let Farm {id, counters: _} = farm;
-        object::delete(id);
-    
+            let Farm {id, counters: _} = farm;
+            object::delete(id);
+        };
         test_scenario::end(scenario);
     }
 }
