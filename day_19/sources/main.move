@@ -135,10 +135,23 @@ module challenge::day_19 {
     // - Checks that total_planted returns 1
     #[test]
     fun test_farm_counters(){
-        let mut ctx = tx_context::dummy();
-        let farm = new_farm(&mut ctx);
+        use sui::test_scenario;
+
+        let sender = @0x1;
+        let mut scenario = test_scenario::begin(sender);
+    
+        let ctx = test_scenario::ctx(&mut scenario);
+        
+        let mut farm = new_farm(ctx);
+        
         plant(&mut farm.counters, 1);
+        
         assert!(total_planted(&farm) == 1, 0);
+        
+        let Farm {id, counters: _} = farm;
+        object::delete(id);
+    
+        test_scenario::end(scenario);
     }
 }
 
